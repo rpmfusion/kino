@@ -1,0 +1,11 @@
+diff -up kino-1.2.0/src/playlist.cc.gcc43 kino-1.2.0/src/playlist.cc
+--- kino-1.2.0/src/playlist.cc.gcc43	2007-09-13 06:32:25.000000000 +0200
++++ kino-1.2.0/src/playlist.cc	2008-01-13 13:12:02.000000000 +0100
+@@ -29,6 +29,7 @@
+ #include <string>
+ #include <list>
+ #include <map>
++#include <algorithm>
+ 
+ using std::cerr;
+ using std::endl;
