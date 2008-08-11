@@ -1,6 +1,6 @@
 Name:           kino
 Version:        1.3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Kino is a non-linear DV editor for GNU/Linux
 
 Group:          Applications/Multimedia
@@ -9,6 +9,7 @@ URL:            http://www.kinodv.org
 Source0:        http://dl.sf.net/kino/kino-%{version}.tar.gz
 Patch0:         %{name}-udev.patch
 Patch3:         %{name}-gcc43.patch
+Patch4:         %{name}-ffmpeg.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gtk2-devel
@@ -50,6 +51,7 @@ Files needed to build kino plugins
 %setup -q
 %patch0 -p1 -b .udev
 %patch3 -p1 -b .gcc43
+%patch4 -p1 -b .ffmpeg
 
 
 %build
@@ -102,6 +104,9 @@ desktop-file-install \
 %{_includedir}/kino
 
 %changelog
+* Mon Aug 11 2008 Dan Horák <dan at danny.cz> - 1.3.0-2
+- fix build with new ffmpeg
+
 * Mon Mar 03 2008 Dan Horák <dan at danny.cz> - 1.3.0-1
 1.3.0
 - dropped upstream'd patches
