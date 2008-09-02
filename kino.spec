@@ -1,5 +1,5 @@
 Name:           kino
-Version:        1.3.1
+Version:        1.3.2
 Release:        1%{?dist}
 Summary:        Kino is a non-linear DV editor for GNU/Linux
 
@@ -24,7 +24,7 @@ BuildRequires: ffmpeg-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libsamplerate-devel
 BuildRequires: zlib-devel
-BuildRequires: gettext
+BuildRequires: gettext intltool
 BuildRequires: perl(XML::Parser)
 
 Requires: audiofile
@@ -100,6 +100,9 @@ desktop-file-install \
 %{_includedir}/kino
 
 %changelog
+* Mon Aug 25 2008 Dan Horák <dan at danny.cz> - 1.3.2-1
+1.3.2
+
 * Wed Aug 13 2008 Dan Horák <dan at danny.cz> - 1.3.1-1
 1.3.1
 - dropped upstream'd patches
