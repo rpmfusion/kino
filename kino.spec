@@ -1,6 +1,6 @@
 Name:           kino
 Version:        1.3.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Kino is a non-linear DV editor for GNU/Linux
 
 Group:          Applications/Multimedia
@@ -27,9 +27,9 @@ BuildRequires: zlib-devel
 BuildRequires: gettext intltool
 BuildRequires: perl(XML::Parser)
 
-Requires: audiofile
-Requires: esound
 Requires: ffmpeg
+Requires: mjpegtools
+Requires: mencoder
 
 %description
 Kino is a non-linear DV editor for GNU/Linux. It features excellent
@@ -100,6 +100,10 @@ desktop-file-install \
 %{_includedir}/kino
 
 %changelog
+* Sat Nov  1 2008 Dan Horák <dan at danny.cz> - 1.3.2-2
+- remove dependency on esound and audiofile
+- add dependency on mjpegtools and mencoder
+
 * Mon Aug 25 2008 Dan Horák <dan at danny.cz> - 1.3.2-1
 1.3.2
 
