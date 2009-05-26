@@ -1,12 +1,13 @@
 Name:           kino
 Version:        1.3.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Kino is a non-linear DV editor for GNU/Linux
 
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://www.kinodv.org
 Source0:        http://dl.sf.net/kino/kino-%{version}.tar.gz
+Source1:        ffmpeg2dirac.sh
 Patch0:         %{name}-udev.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -30,6 +31,8 @@ BuildRequires: perl(XML::Parser)
 Requires: ffmpeg
 Requires: mjpegtools
 Requires: mencoder
+Requires: ffmpeg2dirac
+Requires: ffmpeg2theora
 
 %description
 Kino is a non-linear DV editor for GNU/Linux. It features excellent
@@ -55,16 +58,18 @@ Files needed to build kino plugins
            --disable-static \
            --disable-dependency-tracking \
 
-%{__make} %{?_smp_mflags}
+make %{?_smp_mflags}
 
 
 %install
-%{__rm} -rf ${RPM_BUILD_ROOT}
-%{__make} install DESTDIR=${RPM_BUILD_ROOT}
-%{__rm} ${RPM_BUILD_ROOT}%{_libdir}/kino-gtk2/*.la
-ln -sf kino ${RPM_BUILD_ROOT}%{_bindir}/kino2raw
-%{__rm} ${RPM_BUILD_ROOT}%{_datadir}/applications/Kino.desktop
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+rm $RPM_BUILD_ROOT%{_libdir}/kino-gtk2/*.la
+ln -sf kino $RPM_BUILD_ROOT%{_bindir}/kino2raw
+rm $RPM_BUILD_ROOT%{_datadir}/applications/Kino.desktop
 ln -s Kino.desktop kino.desktop
+
+install -p -m 755 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/%{name}/scripts/exports
 
 %find_lang kino
 
@@ -76,11 +81,11 @@ desktop-file-install \
 
 
 %check
-%{__make} check
+make check
 
 
 %clean
-%{__rm} -rf ${RPM_BUILD_ROOT}
+rm -rf $RPM_BUILD_ROOT
 
 %files -f kino.lang
 %defattr(-,root,root,-)
@@ -100,6 +105,9 @@ desktop-file-install \
 %{_includedir}/kino
 
 %changelog
+* Tue May 26 2009 Dan Horák <dan at danny.cz> - 1.3.3-3
+- add ffmpeg2dirac export script
+
 * Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.3.3-2
 - rebuild for new F11 features
 
