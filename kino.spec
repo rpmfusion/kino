@@ -1,6 +1,6 @@
 Name:           kino
 Version:        1.3.3
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Kino is a non-linear DV editor for GNU/Linux
 
 Group:          Applications/Multimedia
@@ -107,6 +107,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/kino
 
 %changelog
+* Wed Oct 21 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.3.3-5
+- rebuild for new ffmpeg
+
 * Fri Jul 10 2009 Dan Horák <dan at danny.cz> - 1.3.3-4
 - fix export scripts for new ffmpeg (#713)
 
