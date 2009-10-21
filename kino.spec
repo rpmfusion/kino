@@ -1,15 +1,13 @@
 Name:           kino
-Version:        1.3.3
-Release:        5%{?dist}
+Version:        1.3.4
+Release:        1%{?dist}
 Summary:        Kino is a non-linear DV editor for GNU/Linux
 
 Group:          Applications/Multimedia
 License:        GPLv2+
 URL:            http://www.kinodv.org
-Source0:        http://dl.sf.net/kino/kino-%{version}.tar.gz
-Source1:        ffmpeg2dirac.sh
+Source0:        http://downloads.sourceforge.net/kino/kino-%{version}.tar.gz
 Patch0:         %{name}-udev.patch
-Patch1:         %{name}-1.3.3-ffmpeg-metadata.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: gtk2-devel
@@ -35,24 +33,27 @@ Requires: mencoder
 Requires: ffmpeg2dirac
 Requires: ffmpeg2theora
 
+
 %description
 Kino is a non-linear DV editor for GNU/Linux. It features excellent
 integration with IEEE 1394 for capture, VTR control, and recording
 back to the camera. It captures video to disk in AVI format in both
 type-1 DV and type-2 DV (separate audio stream) encodings.
 
+
 %package        devel
 Summary:        Files needed to build kino plugins
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
+
 %description    devel
 Files needed to build kino plugins
+
 
 %prep
 %setup -q
 %patch0 -p1 -b .udev
-%patch1 -p1 -b .metadata
 
 
 %build
@@ -71,14 +72,10 @@ ln -sf kino $RPM_BUILD_ROOT%{_bindir}/kino2raw
 rm $RPM_BUILD_ROOT%{_datadir}/applications/Kino.desktop
 ln -s Kino.desktop kino.desktop
 
-install -p -m 755 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/%{name}/scripts/exports
-
 %find_lang kino
 
 desktop-file-install \
-    --vendor=livna \
     --dir=${RPM_BUILD_ROOT}%{_datadir}/applications \
-    --add-category=X-Livna \
     kino.desktop
 
 
@@ -88,6 +85,7 @@ make check
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
 
 %files -f kino.lang
 %defattr(-,root,root,-)
@@ -102,11 +100,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime/packages/kino.xml
 %{_libdir}/kino-gtk2
 
+
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/kino
 
+
 %changelog
+* Wed Oct 21 2009 Dan Horák <dan at danny.cz> - 1.3.4-1
+- update to 1.3.4 (fixes #882 - failed rebuild with new ffmpeg)
+- use ffmpeg2dirac script from kino
+
 * Wed Oct 21 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 1.3.3-5
 - rebuild for new ffmpeg
 
