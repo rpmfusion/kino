@@ -1,6 +1,6 @@
 Name:           kino
 Version:        1.3.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Kino is a non-linear DV editor for GNU/Linux
 
 Group:          Applications/Multimedia
@@ -76,6 +76,8 @@ ln -s Kino.desktop kino.desktop
 
 desktop-file-install \
     --dir=${RPM_BUILD_ROOT}%{_datadir}/applications \
+    --add-category AudioVideoEditing \
+    --add-category X-AudioVideoCapture \
     kino.desktop
 
 
@@ -107,6 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Oct 23 2009 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 1.3.4-2
+- Update desktop file according to F-12 FedoraStudio feature
+
 * Wed Oct 21 2009 Dan Horák <dan at danny.cz> - 1.3.4-1
 - update to 1.3.4 (fixes #882 - failed rebuild with new ffmpeg)
 - use ffmpeg2dirac script from kino
