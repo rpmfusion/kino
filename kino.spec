@@ -1,6 +1,6 @@
 Name:           kino
 Version:        1.3.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Kino is a non-linear DV editor for GNU/Linux
 
 Group:          Applications/Multimedia
@@ -112,6 +112,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Oct 14 2010 Nicolas Chauvet <kwizart@gmail.com> - 1.3.4-4
+- Rebuilt for gcc bug
+
 * Thu Jul  8 2010 Dan Horák <dan at danny.cz> - 1.3.4-3
 - drop the udev rules patch
 - fix linking with --no-add-needed
